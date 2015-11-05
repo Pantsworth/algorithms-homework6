@@ -17,14 +17,14 @@ import homework6
 #         homework6.reading_weeping(days, sections)
 
 class FirstEncounters(unittest.TestCase):
-    # def test_empty(self):
-    #     homework6.first_encounters("", "", "")
+    def test_empty(self):
+        homework6.first_encounters("", "", "")
 
-    # def test_basic(self):
-    #     a = "a"
-    #     b = "c"
-    #     c = "ac"
-    #     self.assertEqual(homework6.first_encounters(a, b, c), True)
+    def test_basic(self):
+        a = "a"
+        b = "c"
+        c = "ac"
+        self.assertEqual(homework6.first_encounters(a, b, c), True)
 
     def test_harder(self):
         a = "abb"
