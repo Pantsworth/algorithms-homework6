@@ -9,9 +9,8 @@ def reading_weeping(day_array, section_array):
     return
 
 
-def first_encounters(a, b, c):
+def string_interleaving(a, b, c):
     """
-
     :param a: string of characters (ex. "XY")
     :param b: string of characters (ex. "ST")
     :param c: an interleaved string of characters in order from a and b (ex. "XSYT")
@@ -20,6 +19,7 @@ def first_encounters(a, b, c):
     print 'A = ', a, "B = ", b, 'C = ', c
     length_a = len(a)
     length_b = len(b)
+    length_c = len(c)
 
     if len(a) is 0 and len(b) is 0 and len(c) is 0:
         return True
@@ -40,6 +40,7 @@ def first_encounters(a, b, c):
                 memo[i][j] = memo[i][j-1]
                 print "case 2"
                 print memo
+
             # b is an empty string, and A = C
             elif (j == 0) and (c[i-1] == a[i-1]):
                 print "case 3"
@@ -64,22 +65,24 @@ def first_encounters(a, b, c):
                 print "case 6"
                 print memo
 
-    print memo[length_a][length_b]
     return memo[length_a][length_b]
 
 
 def gerrymander(a, b):
 
-    diff_array = []
+    print len(a), len(b)
+    print a[3], b[3]
     p = 0
     q = 0
     length_a = len(a)
+    diff_array = [0 for x in range(length_a)]
 
-    for i in len(a):
-        for j in len(b):
-            diff_array[i] = (a[i]-b[j])
+    for i in range(len(a)):
+        print a[i]-b[i]
+        diff_array[i] = (a[i]-b[i])
 
-    for item in diff_array[i]:
+    print diff_array
+    for item in diff_array:
         if item >= 0:
             p += item
         else:
@@ -88,7 +91,8 @@ def gerrymander(a, b):
     overall_sum = p-q
     neg_offset = abs(q)
 
-    memo = [[[[0 for x in range(length_a)] for x in range(overall_sum)] for x in range(overall_sum)] for x in range (length_a)]
+    memo = [[[[0 for x in range(length_a)] for x in range(overall_sum)] for x in range(overall_sum)]
+            for x in range(length_a)]
     #
     # for i in range(length_a):
     #     for j in range (length)
