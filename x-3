@@ -1,0 +1,63 @@
+
+import random
+
+def rundistribution(children, toynumber):
+    """
+    approximation algorithm for partitioning values such that each partition is equal in value
+    :param children:
+    :param toynumber:
+    :return:
+    """
+    S = [[] for x in range(children)]
+    randset = []
+    for j in range(toynumber):
+        randset.append(random.randrange(0, 100))
+
+
+    average = sum(randset) / len(randset)
+    average_subset = sum(randset) / children
+    print "sum is: ", sum(randset), "average is ", average, "average subset is: ", sum(randset) / children
+
+    median = None
+    randset.sort()
+    print randset
+    if toynumber % 2 == 0:
+        median = (randset[(toynumber/2)-1] + randset[(toynumber/2)])/2
+    else:
+        median = randset[(toynumber/2)-1]
+    print "median is: ", median
+
+
+    while randset:
+        for i in range(children):
+            if len(randset) <= children:
+                R = sorted(S, key=len)
+                for i in range(children):
+                    R = sorted(R, key=len)
+                    if not randset:
+                        print_result(R, average_subset)
+                        return
+                    R[0].append(randset[0])
+                    randset.remove(randset[0])
+                print_result(R, average_subset)
+                return
+            # print randset
+            S[i].append(randset[0])
+            randset.remove(randset[0])
+            if not randset:
+                return S
+            S[i].append(randset[len(randset)-1])
+            randset.remove((randset[len(randset)-1]))
+            # print randset
+            if not randset:
+                return S
+    return S
+
+def print_result(S, subset):
+    children = len(S)
+    for i in range(children):
+        if float((sum(S[i])-subset))/subset > 0.03:
+            print float((sum(S[i])-subset))/subset
+        # print float((sum(S[i])-subset))/subset, "size is: ", len(S[i])
+
+rundistribution(10, 110)
